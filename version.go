@@ -14,64 +14,36 @@ type versionedRanger struct {
 }
 
 func newVersionedRanger(factory rangerFactory) Ranger {
-	return &versionedRanger{
-		ipV4Ranger: factory(rnet.IPv4),
-		ipV6Ranger: factory(rnet.IPv6),
-	}
+	_ = "STUB: not implemented"
+	return *new(Ranger)
 }
 
-func (v *versionedRanger) Insert(entry RangerEntry) error {
-	network := entry.Network()
-	ranger, err := v.getRangerForIP(network.IP)
-	if err != nil {
-		return err
-	}
-	return ranger.Insert(entry)
-}
+func (v *versionedRanger) Insert(entry RangerEntry) error { _ = "STUB: not implemented"; return nil }
 
 func (v *versionedRanger) Remove(network net.IPNet) (RangerEntry, error) {
-	ranger, err := v.getRangerForIP(network.IP)
-	if err != nil {
-		return nil, err
-	}
-	return ranger.Remove(network)
+	_ = "STUB: not implemented"
+	return *new(RangerEntry), nil
 }
 
 func (v *versionedRanger) Contains(ip net.IP) (bool, error) {
-	ranger, err := v.getRangerForIP(ip)
-	if err != nil {
-		return false, err
-	}
-	return ranger.Contains(ip)
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 func (v *versionedRanger) ContainingNetworks(ip net.IP) ([]RangerEntry, error) {
-	ranger, err := v.getRangerForIP(ip)
-	if err != nil {
-		return nil, err
-	}
-	return ranger.ContainingNetworks(ip)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (v *versionedRanger) CoveredNetworks(network net.IPNet) ([]RangerEntry, error) {
-	ranger, err := v.getRangerForIP(network.IP)
-	if err != nil {
-		return nil, err
-	}
-	return ranger.CoveredNetworks(network)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Len returns number of networks in ranger.
-func (v *versionedRanger) Len() int {
-	return v.ipV4Ranger.Len() + v.ipV6Ranger.Len()
-}
+func (v *versionedRanger) Len() int { _ = "STUB: not implemented"; return 0 }
 
 func (v *versionedRanger) getRangerForIP(ip net.IP) (Ranger, error) {
-	if ip.To4() != nil {
-		return v.ipV4Ranger, nil
-	}
-	if ip.To16() != nil {
-		return v.ipV6Ranger, nil
-	}
-	return nil, ErrInvalidNetworkNumberInput
+	_ = "STUB: not implemented"
+	return *new(Ranger), nil
 }

@@ -1,9 +1,9 @@
 /*
-	Example of how to extend github.com/yl2chen/cidranger
+Example of how to extend github.com/yl2chen/cidranger
 
-	This adds ASN as a string field, along with methods to get the ASN and the CIDR as strings
+# This adds ASN as a string field, along with methods to get the ASN and the CIDR as strings
 
-	Thank you to yl2chen for his assistance and work on this library
+Thank you to yl2chen for his assistance and work on this library
 */
 package main
 
@@ -23,25 +23,25 @@ type customRangerEntry struct {
 
 // get function for network
 func (b *customRangerEntry) Network() net.IPNet {
-	return b.ipNet
+	_ = "STUB: not implemented"
+
+	// get function for network converted to string
+	return *new(net.IPNet)
 }
 
-// get function for network converted to string
-func (b *customRangerEntry) NetworkStr() string {
-	return b.ipNet.String()
-}
+func (b *customRangerEntry) NetworkStr() string { _ = "STUB: not implemented"; return "" }
 
 // get function for ASN
 func (b *customRangerEntry) Asn() string {
-	return b.asn
+	_ = "STUB: not implemented"
+
+	// create customRangerEntry object using net and asn
+	return ""
 }
 
-// create customRangerEntry object using net and asn
 func newCustomRangerEntry(ipNet net.IPNet, asn string) cidranger.RangerEntry {
-	return &customRangerEntry{
-		ipNet: ipNet,
-		asn:   asn,
-	}
+	_ = "STUB: not implemented"
+	return *new(cidranger.RangerEntry)
 }
 
 // entry point

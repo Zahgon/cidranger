@@ -4,38 +4,37 @@ inclusion tests against it.
 
 To create a new instance of the path-compressed trie:
 
-			ranger := NewPCTrieRanger()
+	ranger := NewPCTrieRanger()
 
 To insert or remove an entry (any object that satisfies the RangerEntry
 interface):
 
-			_, network, _ := net.ParseCIDR("192.168.0.0/24")
-			ranger.Insert(NewBasicRangerEntry(*network))
-			ranger.Remove(network)
+	_, network, _ := net.ParseCIDR("192.168.0.0/24")
+	ranger.Insert(NewBasicRangerEntry(*network))
+	ranger.Remove(network)
 
 If you desire for any value to be attached to the entry, simply
 create custom struct that satisfies the RangerEntry interface:
 
-			type RangerEntry interface {
-				Network() net.IPNet
-			}
+	type RangerEntry interface {
+		Network() net.IPNet
+	}
 
 To test whether an IP is contained in the constructed networks ranger:
 
-			// returns bool, error
-			containsBool, err := ranger.Contains(net.ParseIP("192.168.0.1"))
+	// returns bool, error
+	containsBool, err := ranger.Contains(net.ParseIP("192.168.0.1"))
 
 To get a list of CIDR blocks in constructed ranger that contains IP:
 
-			// returns []RangerEntry, error
-			entries, err := ranger.ContainingNetworks(net.ParseIP("192.168.0.1"))
+	// returns []RangerEntry, error
+	entries, err := ranger.ContainingNetworks(net.ParseIP("192.168.0.1"))
 
 To get a list of all IPv4/IPv6 rangers respectively:
 
-			// returns []RangerEntry, error
-			entries, err := ranger.CoveredNetworks(*AllIPv4)
-			entries, err := ranger.CoveredNetworks(*AllIPv6)
-
+	// returns []RangerEntry, error
+	entries, err := ranger.CoveredNetworks(*AllIPv4)
+	entries, err := ranger.CoveredNetworks(*AllIPv6)
 */
 package cidranger
 
@@ -56,10 +55,7 @@ var AllIPv4 = parseCIDRUnsafe("0.0.0.0/0")
 // AllIPv6 is a IPv6 CIDR that contains all networks
 var AllIPv6 = parseCIDRUnsafe("0::0/0")
 
-func parseCIDRUnsafe(s string) *net.IPNet {
-	_, cidr, _ := net.ParseCIDR(s)
-	return cidr
-}
+func parseCIDRUnsafe(s string) *net.IPNet { _ = "STUB: not implemented"; return nil }
 
 // RangerEntry is an interface for insertable entry into a Ranger.
 type RangerEntry interface {
@@ -71,15 +67,16 @@ type basicRangerEntry struct {
 }
 
 func (b *basicRangerEntry) Network() net.IPNet {
-	return b.ipNet
+	_ = "STUB: not implemented"
+
+	// NewBasicRangerEntry returns a basic RangerEntry that only stores the network
+	// itself.
+	return *new(net.IPNet)
 }
 
-// NewBasicRangerEntry returns a basic RangerEntry that only stores the network
-// itself.
 func NewBasicRangerEntry(ipNet net.IPNet) RangerEntry {
-	return &basicRangerEntry{
-		ipNet: ipNet,
-	}
+	_ = "STUB: not implemented"
+	return *new(RangerEntry)
 }
 
 // Ranger is an interface for cidr block containment lookups.
@@ -94,6 +91,4 @@ type Ranger interface {
 
 // NewPCTrieRanger returns a versionedRanger that supports both IPv4 and IPv6
 // using the path compressed trie implemention.
-func NewPCTrieRanger() Ranger {
-	return newVersionedRanger(newPrefixTree)
-}
+func NewPCTrieRanger() Ranger { _ = "STUB: not implemented"; return *new(Ranger) }
